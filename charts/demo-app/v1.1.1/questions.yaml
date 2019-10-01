@@ -1,0 +1,152 @@
+---
+minimum_rancher_version: v2.1.0
+questions:
+
+# Application
+# Name
+- variable: application.name
+  default: seo-render
+  description: Deployment name
+  type: string
+  group: Name
+
+# Service
+- variable: application.service_port
+  default: "8080"
+  description: Service port
+  type: string
+  group: Service
+
+
+# MySQL
+- variable: application.mysql.enabled
+  default: false
+  description: "Use MySQL cache"
+  label: "MySQL"
+  type: boolean
+  show_if: application.app_enable_cache=true&&application.app_cache_type=mysql
+  show_subquestion_if: true
+  group: "MySQL"
+  subquestions:
+    - variable: application.mysql.host
+      default: "seo-render-mariadb"
+      description: "MySQL host"
+      type: string
+    - variable: application.mysql.port
+      default: 3306
+      description: "MySQL port"
+      type: string
+    - variable: application.mysql.user
+      default: "seo-render"
+      description: "MySQL username"
+      type: string
+    - variable: application.mysql.password
+      default: "R00tP@ssw0rd"
+      description: "MySQL password"
+      type: string
+    - variable: application.mysql.db
+      default: "seo_render"
+      description: "MySQL database"
+      type: string
+# MySQL 
+
+# Images
+- variable: application.container.image.repository
+  default: harbor.2019.gecon.by:443/gecon/gecon-2019-demo-app
+  description: Image repository URL
+  type: string
+  group: Image
+- variable: application.container.image.tag
+  default: develop
+  description: Docker image tag
+  type: string
+  group: Image
+- variable: application.container.image.pullPolicy
+  default: Always
+  description: Docker pullPolicy
+  type: enum
+  options:
+    - "Always"
+    - "IfNotPresent"
+  group: Image
+
+- variable: application.healthcheck_enabled
+  default: false
+  description: healthcheck_enabled
+  type: boolean
+  group: SEO Render
+
+# Resources
+- variable: application.defaultResources
+  default: true
+  description: "Use default resources allocation"
+  label: "Default resources allocation"
+  type: boolean
+  show_subquestion_if: false
+  group: "Application Resources"
+  subquestions:
+  - variable: application.resources.replicaCount
+    default: 1
+    label: "Replicas count"
+    type: int
+  - variable: application.resources.requests.memory
+    default: 256Mi
+    label: "Requests memory"
+    type: string
+  - variable: application.resources.requests.cpu
+    default: 250m
+    label: "Requests CPU"
+    type: string
+  - variable: application.resources.limits.memory
+    default: 512Mi
+    label: Resources memory limit
+    type: string
+  - variable: application.resources.limits.cpu
+    default: 500m
+    label: Resources CPU limit
+    type: string 
+
+# Ingress
+- variable: ingress.enabled
+  default: true
+  description: "Expose app using Layer 7 Load Balancer - ingress"
+  type: boolean
+  label: Expose app using Layer 7 Load Balancer
+  show_subquestion_if: true
+  group: "Services and Load Balancing"
+
+  subquestions:
+  - variable: ingress.limit_rps
+    default: "5"
+    description: "Number of requests accepted from a given IP each second"
+    type: string
+    required: true
+    label: Limit RPS
+  - variable: ingress.limit_connections
+    default: "100"
+    description: "Number of concurrent connections allowed from a single IP address."
+    type: string
+    required: true
+    label: Limit Connections
+  - variable: ingress.host
+    default: "xip.io"
+    description: "Hostname to your BFLW BFF application"
+    type: hostname
+    required: true
+    label: Hostname
+  - variable: ingress.TlsEnabled
+    default: true
+    type: boolean
+    label: Enable default TLS
+    group: "Services and Load Balancing"
+
+- variable: serviceType
+  default: "LoadBalancer"
+  description: "Application Service type"
+  type: enum
+  show_if: "ingress.enabled=false"
+  options:
+  - "LoadBalancer"
+  required: true
+  label: BFF Service Type
+  group: "Services and Load Balancing"

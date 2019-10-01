@@ -1,0 +1,27 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.application.name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/limit-rps: "{{ .Values.ingress.limit_rps }}"
+    ingress.kubernetes.io/limit-connections: "{{ .Values.ingress.limit_connections }}"
+spec:
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ .Values.application.name }}
+              servicePort: {{ .Values.application.service_port }}
+  {{- if .Values.ingress.TlsEnabled }}
+  tls:
+  - {}
+  {{- end -}}

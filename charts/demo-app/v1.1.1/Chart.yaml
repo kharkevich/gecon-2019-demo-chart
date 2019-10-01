@@ -1,0 +1,10 @@
+apiVersion: v1
+appVersion: "1.1"
+description: A Helm chart for GeCon Demo application
+name: seo-render
+version: 1.1.1
+icon: file://../icon.jpg
+maintainers:
+- name: EPAM Lean Delivery Team
+  email: team@lean-delivery.com
+home: https://github.com/kharkevich/gecon-2019-demo-app

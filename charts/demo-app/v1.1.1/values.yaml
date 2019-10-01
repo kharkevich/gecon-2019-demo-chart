@@ -1,0 +1,31 @@
+---
+application:
+  name: gecon-2019-demo-app
+  service_port: "8080"
+  container:
+    image:
+      repository: harbor.2019.gecon.by:443/gecon/gecon-2019-demo-app
+      tag: develop
+      pullPolicy: Always
+  healthcheck_enabled: true
+  resources:
+    replicaCount: 1
+  mysql:
+    user: user
+    password: secret
+    host: mysql
+    port: 3306
+    db: gecon
+  # mysql_connection: "connection-string"
+  # MYSQL_CONNECTION="$DBUSER:$DBPASSWORD@tcp($DBHOST:3306)/$DATABASE"
+ingress:
+  limit_connections: "100"
+  limit_rps: "5"
+  enabled: false
+  host: "xip.io"
+  TlsEnabled: true
+    # Secrets must be manually created in the namespace. 
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local 

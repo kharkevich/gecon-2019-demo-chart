@@ -1,0 +1,19 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ .Values.application.name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.application.name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  ports:
+    - port: {{ .Values.application.service_port }}
+      targetPort: {{ .Values.application.service_port }}
+      protocol: TCP
+      name: {{ .Values.application.name }}
+  selector:
+    app.kubernetes.io/name: {{ .Values.application.name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
