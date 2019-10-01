@@ -3,7 +3,7 @@ appVersion: "1.1"
 description: A Helm chart for GeCon Demo application
 name: seo-render
 version: 1.1.1
-icon: file://../icon.jpg
+icon: file://../icon.png
 maintainers:
 - name: EPAM Lean Delivery Team
   email: team@lean-delivery.com
