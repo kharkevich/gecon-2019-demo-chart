@@ -1,7 +1,7 @@
 apiVersion: v1
 appVersion: "1.1"
 description: A Helm chart for GeCon Demo application
-name: seo-render
+name: gecon-app
 version: 1.1.1
 icon: file://../icon.png
 maintainers:
