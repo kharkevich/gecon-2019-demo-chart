@@ -5,17 +5,17 @@ questions:
 # Application
 # Name
 - variable: application.name
-  default: seo-render
+  default: gecon-demo
   description: Deployment name
   type: string
-  group: Name
+  group: application
 
 # Service
 - variable: application.service_port
   default: "8080"
   description: Service port
   type: string
-  group: Service
+  group: application
 
 
 # MySQL
@@ -29,7 +29,7 @@ questions:
   group: "MySQL"
   subquestions:
     - variable: application.mysql.host
-      default: "seo-render-mariadb"
+      default: "demo-app-mariadb"
       description: "MySQL host"
       type: string
     - variable: application.mysql.port
@@ -37,7 +37,7 @@ questions:
       description: "MySQL port"
       type: string
     - variable: application.mysql.user
-      default: "seo-render"
+      default: "proxyuser"
       description: "MySQL username"
       type: string
     - variable: application.mysql.password
@@ -45,7 +45,7 @@ questions:
       description: "MySQL password"
       type: string
     - variable: application.mysql.db
-      default: "seo_render"
+      default: "messagesdb"
       description: "MySQL database"
       type: string
 # MySQL 
@@ -74,7 +74,7 @@ questions:
   default: false
   description: healthcheck_enabled
   type: boolean
-  group: SEO Render
+  group: application
 
 # Resources
 - variable: application.defaultResources
