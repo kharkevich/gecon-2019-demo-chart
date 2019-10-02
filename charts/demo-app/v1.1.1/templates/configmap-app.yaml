@@ -5,6 +5,6 @@ metadata:
   name: {{ .Values.application.name }}-config
   namespace: {{ .Release.Namespace }}
 data:
-  mysql_host: mysql
-  mysql_port: 3306
-  mysql_db: gecon
+  mysql_host: "{{ .Values.application.mysql.host }}"
+  mysql_port: "{{ .Values.application.mysql.port }}"
+  mysql_db: "{{ .Values.application.mysql.db }}"
