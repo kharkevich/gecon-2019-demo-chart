@@ -33,5 +33,5 @@ Create env list.
       name: {{ .Values.application.name }}-mysql-credentials
       key: mysql_password
 
--  { name: DATABASE_URL, value: "{{ printf "$(DATABASE_LOGIN):$(DATABASE_PASSWORD)@$(DATABASE_HOST):$(DATABASE_PORT)/$(DATABASE_DB)" }}"}
+-  { name: MYSQL_CONNECTION, value: "{{ printf "$(DATABASE_LOGIN):$(DATABASE_PASSWORD)@$(DATABASE_HOST):$(DATABASE_PORT)/$(DATABASE_DB)" }}"}
 {{- end -}}
