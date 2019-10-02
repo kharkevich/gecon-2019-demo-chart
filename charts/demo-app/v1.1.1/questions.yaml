@@ -20,7 +20,7 @@ questions:
 
 # MySQL
 - variable: application.mysql.enabled
-  default: false
+  default: true
   description: "Use MySQL cache"
   label: "MySQL"
   type: boolean
